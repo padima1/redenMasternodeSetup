@@ -22,7 +22,7 @@ git clone https://github.com/fasterpool/EDEN-MN-SETUP
 Navigate to the install folder:
 
 ```bash
-cd MN-SETUP
+cd EDEN-MN-SETUP
 ```
 
 Install & configure your desired master node with options. ```
