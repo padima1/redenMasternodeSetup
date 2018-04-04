@@ -17,7 +17,7 @@ Write this down or copy it somewhere safe.
 SSH (Putty Suggested) to your VPS, login to root, and clone the Github repository:
 
 ```bash
-git clone https://github.com/Northerncryptodev/MN-SETUP
+git clone https://github.com/fasterpool/EDEN-MN-SETUP
 ```
 Navigate to the install folder:
 
@@ -37,18 +37,18 @@ When the script asks, input your VPS IP Address and Private Key (You can copy yo
 
 Once done, the VPS will ask you to go start your masternode in the local wallet
 
-In appdata/roaming/Northern, open up masternode.conf
+In appdata/roaming/Eden, open up masternode.conf
 
 Insert as a new line the following:
 
 ```bash
-masternodename ipaddress:60151 privatekey output
+masternodename ipaddress:3595 privatekey output
 ```
 
 Open up the local wallet, unlock with your encryption password, and open up the Debug Console
 
 ```bash
-startmasternode alias false <masternodename>
+masternode start-alias <masternodename>
 ```
 If done correctly, it will indicate that the masternode has been started correctly. 
 
