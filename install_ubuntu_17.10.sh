@@ -2,15 +2,15 @@
 clear
 
 STRING1="Make sure you double check before hitting enter! Only one shot at these!"
-STRING2="If you found this helpful, please donate to NORT Donation: "
-STRING3="nKHHz5J1xQ1RdKbYau5heo2v2ziqxn1chy"
+STRING2="If you found this helpful, please donate to EDEN Donation: "
+STRING3="EbShbYatMRezVTWJK9AouFWzczkTz5zvYQ"
 STRING4="Updating system and installing required packages."
 STRING5="Switching to Aptitude"
 STRING6="Some optional installs"
 STRING7="Starting your masternode"
 STRING8="Now, you need to finally start your masternode in the following order:"
 STRING9="Go to your windows wallet and from the Control wallet debug console please enter"
-STRING10="startmasternode alias false <mymnalias>"
+STRING10="masternode start-alias <mymnalias>"
 STRING11="where <mymnalias> is the name of your masternode alias (without brackets)"
 STRING12="once completed please return to VPS and press the space bar"
 STRING13=""
@@ -19,7 +19,7 @@ STRING14="Please Wait a minimum of 5 minutes before proceeding, the node wallet 
 echo $STRING1
 
 read -e -p "Server IP Address : " ip
-read -e -p "Masternode Private Key (e.g. 7edfjLCUzGczZi3JQw8GHp434R9kNY33eFyMGeKRymkB56G4324h # THE KEY YOU GENERATED EARLIER) : " key
+read -e -p "Masternode Private Key (e.g. 7rVTLnLh9GFFrwFrudxMNcikVbf3uQTwH7PrqhTxdWzUfGtdC9f # THE KEY YOU GENERATED EARLIER) : " key
 read -e -p "Install Fail2ban? [Y/n] : " install_fail2ban
 read -e -p "Install UFW and configure ports? [Y/n] : " UFW
 
@@ -57,17 +57,24 @@ if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
   sudo ufw default deny incoming
   sudo ufw default allow outgoing
   sudo ufw allow ssh
-  sudo ufw allow 60151/tcp
-  sudo ufw enable -y
+  sudo ufw allow 3595/tcp
+  sudo ufw enable
 fi
 
-#Install Northern Daemon
-wget https://github.com/Northerncryptodev/Northern/releases/download/v2.0.1/northern-2.0.1.x86_64-linux-gnu-daemon-nogui.tar.gz
-sudo tar -xzvf northern-2.0.1.x86_64-linux-gnu-daemon-nogui.tar.gz
-sudo rm northern-2.0.1.x86_64-linux-gnu-daemon-nogui.tar.gz
-sudo cp ~/northern-2.0.1/northernd /usr/bin
-sudo cp ~/northern-2.0.1/northern-cli /usr/bin
-northernd -daemon
+#Install Daemon
+wget https://gitlab.com/edenresearch/releases/raw/master/Linux/Eden-v1.0.0.1-ubuntu16.tar.xz
+sudo tar xf Eden-v1.0.0.1-ubuntu16.tar.xz
+sudo rm Eden-v1.0.0.1-ubuntu16.tar.xz
+sudo cp ~/Eden-v1.0.0.1-ubuntu16/edend /usr/bin
+sudo cp ~/Eden-v1.0.0.1-ubuntu16/eden-cli /usr/bin
+chmod +x /usr/bin/edend
+chmod +x /usr/bin/eden-cli
+
+edend -daemon
+sleep 10
+
+eden-cli stop
+sleep 10
 clear
 
 #Setting up coin
@@ -79,7 +86,7 @@ echo $STRING13
 echo $STRING4
 sleep 10
 
-#Create northern.conf
+#Create eden.conf
 echo '
 rpcuser='$password'
 rpcpassword='$password2'
@@ -88,25 +95,24 @@ listen=1
 server=1
 daemon=1
 logtimestamps=1
-maxconnections=256
+maxconnections=32
 externalip='$ip'
-bind='$ip':60151
-masternodeaddr='$ip'
+bind='$ip':3595
 masternodeprivkey='$key'
 masternode=1
-' | sudo -E tee ~/.northern/northern.conf >/dev/null 2>&1
-sudo chmod 0600 ~/.northern/northern.conf
+' | sudo -E tee ~/.eden/eden.conf >/dev/null 2>&1
+sudo chmod 0600 ~/.eden/eden.conf
 
 #Starting coin
 (
   crontab -l 2>/dev/null
-  echo '@reboot sleep 30 && northernd -daemon -shrinkdebugfile'
+  echo '@reboot sleep 30 && edend -daemon -shrinkdebugfile'
 ) | crontab
 (
   crontab -l 2>/dev/null
-  echo '@reboot sleep 60 && northern-cli startmasternode local false'
+  echo '@reboot sleep 60 && eden-cli masternode start'
 ) | crontab
-northernd -daemon
+edend -daemon
 
 clear
 echo $STRING2
@@ -130,5 +136,5 @@ echo $STRING14
 sleep 5m
 
 read -p "Press any key to continue... " -n1 -s
-northern-cli startmasternode local false
-northern-cli masternode status
+eden-cli masternode start
+eden-cli masternode status
