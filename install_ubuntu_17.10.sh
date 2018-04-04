@@ -62,16 +62,16 @@ if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
 fi
 
 #Install Daemon
-wget https://gitlab.com/edenresearch/releases/raw/master/Linux/Eden-v1.0.0.1-ubuntu16.tar.xz
-sudo tar xf Eden-v1.0.0.1-ubuntu16.tar.xz
-sudo rm Eden-v1.0.0.1-ubuntu16.tar.xz
-sudo cp ~/Eden-v1.0.0.1-ubuntu16/edend /usr/bin
-sudo cp ~/Eden-v1.0.0.1-ubuntu16/eden-cli /usr/bin
+wget https://gitlab.com/edenresearch/releases/raw/master/Linux/Eden-v1.0.0.1-ubuntu16.tar.gz
+sudo tar -xzvf Eden-v1.0.0.1-ubuntu16.tar.gz
+sudo rm Eden-v1.0.0.1-ubuntu16.tar.gz
+sudo cp Eden-v1.0.0.1-ubuntu16/edend /usr/bin
+sudo cp Eden-v1.0.0.1-ubuntu16/eden-cli /usr/bin
 chmod +x /usr/bin/edend
 chmod +x /usr/bin/eden-cli
 
 edend -daemon
-sleep 10
+sleep 30
 
 eden-cli stop
 sleep 10
