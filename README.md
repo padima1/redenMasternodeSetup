@@ -11,9 +11,9 @@ If you follow the steps and use a newly created Ubuntu 16.04 VPS, it will automa
 3) Generate your Masternode Private Key in Windows wallet
 ```bash
 masternode genkey
-
-Write this down or copy it somewhere safe. You will need this key to set up MN on VPS later.
 ```
+Write this down or copy it somewhere safe. You will need this key to set up MN on VPS later.
+
 4) View your Output transaction ID in Windows wallet console
 
 ```bash
