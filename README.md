@@ -64,3 +64,22 @@ If done correctly, it will indicate that the masternode has been started correct
 Go back to your VPS and hit the spacebar. It will say that it needs to sync. You're all done!
 
 Now you just need to wait for the VPS to sync up the blockchain and await your first masternode payment.
+
+Finally, to monitor your masternode status you can use:
+
+```bash
+eden-cli masternode status
+
+eden-cli mnsync status
+```
+
+To see what masternode is doing on the network, you can use tail to monitor the debug.log file in realtime:
+
+```bash
+sudo tail -f ~/.eden/debug.log
+```
+
+In conclusion, try restarting your VPS server and see if masternode comes back online automatically. The script adds a cron job which starts the daemon and the masternode after reboot.
+
+Enjoy and hope that EDEN makes it to the moon!
+note that we still have 0% pool fees at https://fasterpool.com :)
