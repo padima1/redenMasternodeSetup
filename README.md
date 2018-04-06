@@ -4,7 +4,11 @@ NOTE: This installation guide is provided as is with no warranties of any kind.
 
 If you follow the steps and use a newly created Ubuntu 16.04 VPS, it will automatically configure and start your Master Node. You will need to input your public VPS IP address and masternode private key.
 
-1) In Windows wallet, create a new receive address and name it mn1 for example.
+Steps:
+
+0) Create a new VPS or use existing one. Recommended config is similar to vultr's $5/mo (25GB SSD/1xCPU/1GB RAM, Ubuntu 16.04). It can handle several MNs running simultaneously on the same IP address but they have to use dirfferent ports. Therefore you cannot easily run more than one EDEN MN on the same box. Different coins are fine.
+
+1) In Windows wallet, create a new receiving address and name it mn1 for example.
 
 2) Send exactly 2500 EDEN to this new address.
 
