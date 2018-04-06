@@ -61,7 +61,16 @@ masternode start-alias <masternodename>
 ```
 If done correctly, it will indicate that the masternode has been started correctly. 
 
-Go back to your VPS and hit the spacebar. It will say that it needs to sync. You're all done!
+Go back to your VPS and hit the spacebar. It will attempt to start your new masternode using the following commands:
+
+```bash
+eden-cli masternode start
+eden-cli masternode status
+```
+
+The status check will say that it needs to sync. This initial sync process may take several minutes to several hours.
+
+At this point you're all done!
 
 Now you just need to wait for the VPS to sync up the blockchain and await your first masternode payment.
 
@@ -73,13 +82,15 @@ eden-cli masternode status
 eden-cli mnsync status
 ```
 
-To see what masternode is doing on the network, you can use tail to monitor the debug.log file in realtime:
+If you are really bored waiting for the sync to complete, you can watch what masternode is doing on the network at any time by using tail to monitor the debug.log file in realtime:
 
 ```bash
 sudo tail -f ~/.eden/debug.log
 ```
 
-In conclusion, try restarting your VPS server and see if masternode comes back online automatically. The script adds a cron job which starts the daemon and the masternode after reboot.
+In conclusion, try restarting your VPS server and see if masternode comes back online automatically. The script adds a cron job which starts edend daemon and the masternode after every reboot.
 
 Enjoy and hope that EDEN makes it to the moon!
 note that we still have 0% pool fees at https://fasterpool.com :)
+
+--Allroad
