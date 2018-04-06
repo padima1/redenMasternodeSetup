@@ -70,18 +70,17 @@ chmod +x /usr/bin/eden-cli
 #Start Daemon so it will create coin directory (~/.eden)
 edend -daemon
 
-echo 'sleep for 30 seconds...'
+echo "sleep for 30 seconds..."
 sleep 30
 
 #Stop Daemon
 eden-cli stop
 
-echo 'sleep for 30 seconds...'
+echo "sleep for 30 seconds..."
 sleep 30
 
 #Setting up coin
-echo 'Setting up coin...'
-echo $STRING2
+echo "Setting up coin..."
 echo $STRING13
 echo $STRING3
 echo $STRING13
@@ -114,7 +113,7 @@ sudo chmod 0600 ~/.eden/eden.conf
   echo '@reboot sleep 60 && eden-cli masternode start'
 ) | crontab
 
-echo 'Coin setup complete.'
+echo "Coin setup complete."
 
 #Start Daemon with newly created conf file (daemon=1)
 edend
