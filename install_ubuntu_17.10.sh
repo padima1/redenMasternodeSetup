@@ -123,7 +123,6 @@ echo $STRING2
 echo $STRING13
 echo $STRING3
 echo $STRING13
-echo $STRING4
 sleep 10
 echo $STRING7
 echo $STRING13
