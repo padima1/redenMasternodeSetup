@@ -4,7 +4,7 @@ clear
 STRING1="Make sure you double check before hitting enter! Only one shot at these!"
 STRING2="If you found this helpful, please donate to EDEN Donation: "
 STRING3="EbShbYatMRezVTWJK9AouFWzczkTz5zvYQ"
-STRING4="Updating system and installing required packages."
+STRING4="Updating system and installing required packages..."
 STRING5="Switching to Aptitude"
 STRING6="Some optional installs"
 STRING7="Starting your masternode"
@@ -62,23 +62,25 @@ if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
 fi
 
 #Install Daemon
-wget https://gitlab.com/edenresearch/releases/raw/master/Linux/Eden-v1.0.0.1-ubuntu16.tar.gz
-sudo tar -xzvf Eden-v1.0.0.1-ubuntu16.tar.gz
-sudo rm Eden-v1.0.0.1-ubuntu16.tar.gz
-sudo cp Eden-v1.0.0.1-ubuntu16/edend /usr/bin
-sudo cp Eden-v1.0.0.1-ubuntu16/eden-cli /usr/bin
+sudo cp -v ~/EDEN-MN-SETUP/Eden-v1.0.0.1-ubuntu16/edend /usr/bin/
+sudo cp -v ~/EDEN-MN-SETUP/Eden-v1.0.0.1-ubuntu16/eden-cli /usr/bin/
 chmod +x /usr/bin/edend
 chmod +x /usr/bin/eden-cli
 
+#Start Daemon so it will create coin directory (~/.eden)
 edend -daemon
+
+echo 'sleep for 30 seconds...'
 sleep 30
 
+#Stop Daemon
 eden-cli stop
-sleep 10
-clear
+
+echo 'sleep for 30 seconds...'
+sleep 30
 
 #Setting up coin
-clear
+echo 'Setting up coin...'
 echo $STRING2
 echo $STRING13
 echo $STRING3
@@ -87,7 +89,6 @@ echo $STRING4
 sleep 10
 
 #Create eden.conf
-echo '
 rpcuser='$password'
 rpcpassword='$password2'
 rpcallowip=127.0.0.1
@@ -112,9 +113,12 @@ sudo chmod 0600 ~/.eden/eden.conf
   crontab -l 2>/dev/null
   echo '@reboot sleep 60 && eden-cli masternode start'
 ) | crontab
-edend -daemon
 
-clear
+echo 'Coin setup complete.'
+
+#Start Daemon with newly created conf file (daemon=1)
+edend
+
 echo $STRING2
 echo $STRING13
 echo $STRING3
