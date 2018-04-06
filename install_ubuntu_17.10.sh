@@ -88,6 +88,7 @@ echo $STRING4
 sleep 10
 
 #Create eden.conf
+echo '
 rpcuser='$password'
 rpcpassword='$password2'
 rpcallowip=127.0.0.1
