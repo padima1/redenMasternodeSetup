@@ -48,11 +48,16 @@ Once done, the VPS will ask you to start your masternode in your Windows wallet.
 
 8) On your Windows machine, close wallet app. Navigate to %appdata%/roaming/Eden, open masternode.conf with Notepad.
 
-Insert as a new line the following:
+Insert as a new line the following line for each masternode you are running:
 
 ```bash
-masternodename ipaddress:3595 privatekey output
+masternodealias vpspublicipaddress:3595 masternodeprivatekey output
 ```
+Example:
+```bash
+mn1 231.321.11.22:3595 7rG2VYFdibSdgWiVUMgfAnhsNKYbWAkL3GHYrJyPhAviaiccC1Z 06ffb02bf3ae7281392e82fa682b1e3c07c8d49c8f19ac9a429cfbf40a0d16da 1
+```
+
 
 Open up the wallet, unlock with your encryption password, and open up the Debug Console
 
