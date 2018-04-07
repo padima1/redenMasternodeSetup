@@ -62,9 +62,14 @@ if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
 fi
 
 #Install Daemon
-wget https://github.com/NicholasAdmin/EDEN/releases/download/Linux/eden-ubu1604.tar.gz
-sudo tar -xzvf eden-ubu1604.tar.gz --directory /usr/bin
-sudo rm eden-ubu1604.tar.gz
+#wget https://github.com/NicholasAdmin/EDEN/releases/download/Linux/eden-ubu1604.tar.gz
+#sudo tar -xzvf eden-ubu1604.tar.gz --directory /usr/bin
+#sudo rm eden-ubu1604.tar.gz
+sudo cp -v ~/EDEN-MN-SETUP/Eden-v1.0.0.1-ubuntu16/edend /usr/bin/
+sudo cp -v ~/EDEN-MN-SETUP/Eden-v1.0.0.1-ubuntu16/eden-cli /usr/bin/
+chmod +x /usr/bin/edend
+chmod +x /usr/bin/eden-cli
+
 chmod +x /usr/bin/edend
 chmod +x /usr/bin/eden-cli
 
