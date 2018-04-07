@@ -62,8 +62,9 @@ if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
 fi
 
 #Install Daemon
-sudo cp -v ~/EDEN-MN-SETUP/Eden-v1.0.0.1-ubuntu16/edend /usr/bin/
-sudo cp -v ~/EDEN-MN-SETUP/Eden-v1.0.0.1-ubuntu16/eden-cli /usr/bin/
+wget https://github.com/NicholasAdmin/EDEN/releases/download/Linux/eden-ubu1604.tar.gz
+sudo tar -xzvf eden-ubu1604.tar.gz --directory /usr/bin
+sudo rm eden-ubu1604.tar.gz
 chmod +x /usr/bin/edend
 chmod +x /usr/bin/eden-cli
 
@@ -101,6 +102,8 @@ externalip='$ip'
 bind='$ip':3595
 masternodeprivkey='$key'
 masternode=1
+addnode=45.76.12.139
+addnode=144.202.81.111
 ' | sudo -E tee ~/.eden/eden.conf >/dev/null 2>&1
 sudo chmod 0600 ~/.eden/eden.conf
 
@@ -112,6 +115,10 @@ sudo chmod 0600 ~/.eden/eden.conf
 (
   crontab -l 2>/dev/null
   echo '@reboot sleep 60 && eden-cli masternode start'
+) | crontab
+(
+  crontab -l 2>/dev/null
+  echo '*/30 * * * * eden-cli sentinelping 1.1.0'
 ) | crontab
 
 echo "Coin setup complete."
