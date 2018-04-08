@@ -7,8 +7,8 @@ The objective of this configuration is to consolidate masternodes into fewer num
 **Prerequisities**
 
 ```bash
-	- What you need to know: What is an IP address; how to perform basic text file operations in Linux
-	- At least one masternode successfully deployed and running on VPS @ Vultr (Ubuntu 16.04 $5/mo 1xCPU/1GB RAM/25GB SSD)
+- What you need to know: What is an IP address; how to perform basic text editing and file operations in Linux
+- At least one masternode successfully deployed and running on VPS @ Vultr (Ubuntu 16.04 $5/mo 1xCPU/1GB RAM/25GB SSD)
 ```
 
 If you dont yet have a masternode running successfully on Vultr VPS, refer to the Setup Guide, deploy one VPS and perform scripted installation per guide. If you are new to Vultr, feel free to use my afilliate link: https://www.vultr.com/?ref=7363317
