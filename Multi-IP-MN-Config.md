@@ -36,11 +36,6 @@ iface ens3 inet static
 	dns-nameservers 108.61.10.10
 	post-up ip route add 169.254.0.0/16 dev ens3
 
-iface ens3 inet6 static
-	address 2001:19f0:8001:d6d:5400:01ff:fe71:d318
-	netmask 64
-	dns-nameservers 2001:19f0:300:1704::6
-
 auto ens3:1
 iface ens3:1 inet static
 	address 45.63.34.190
