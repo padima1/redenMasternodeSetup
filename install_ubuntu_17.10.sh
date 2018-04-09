@@ -20,8 +20,8 @@ echo $STRING1
 
 read -e -p "Server IP Address : " ip
 read -e -p "Masternode Private Key (e.g. 7rVTLnLh9GFFrwFrudxMNcikVbf3uQTwH7PrqhTxdWzUfGtdC9f # THE KEY YOU GENERATED EARLIER) : " key
-read -e -p "Install Fail2ban? [Y/n] : " install_fail2ban
-read -e -p "Install UFW and configure ports? [Y/n] : " UFW
+#read -e -p "Install Fail2ban? [Y/n] : " install_fail2ban
+#read -e -p "Install UFW and configure ports? [Y/n] : " UFW
 
 clear
 echo $STRING2
@@ -36,7 +36,7 @@ sudo apt-get -y update
 sudo apt-get -y upgrade
 sudo apt-get -y autoremove
 sudo apt-get install wget nano htop -y
-sudo apt-get install build-essential && sudo apt-get install libtool autotools-dev autoconf automake && sudo apt-get install libssl-dev && sudo apt-get install libboost-all-dev && sudo apt install software-properties-common && sudo add-apt-repository ppa:bitcoin/bitcoin && sudo apt update && sudo apt-get install libdb4.8-dev && sudo apt-get install libdb4.8++-dev && sudo apt-get install libminiupnpc-dev && sudo apt-get install libqt4-dev libprotobuf-dev protobuf-compiler && sudo apt-get install libqrencode-dev && sudo apt-get install -y git && sudo apt-get install pkg-config
+sudo apt-get install build-essential -y && sudo apt-get install libtool autotools-dev autoconf automake -y && sudo apt-get install libssl-dev -y && sudo apt-get install libboost-all-dev -y && sudo apt install software-properties-common -y && sudo add-apt-repository ppa:bitcoin/bitcoin -y && sudo apt update -y && sudo apt-get install libdb4.8-dev -y && sudo apt-get install libdb4.8++-dev -y && sudo apt-get install libminiupnpc-dev -y && sudo apt-get install libqt4-dev libprotobuf-dev protobuf-compiler -y && sudo apt-get install libqrencode-dev -y && sudo apt-get install -y git -y && sudo apt-get install pkg-config -y
 sudo apt-get -y install libzmq3-dev
 clear
 echo $STRING5
@@ -47,19 +47,19 @@ password=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 password2=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 
 echo $STRING6
-if [[ ("$install_fail2ban" == "y" || "$install_fail2ban" == "Y" || "$install_fail2ban" == "") ]]; then
+#if [[ ("$install_fail2ban" == "y" || "$install_fail2ban" == "Y" || "$install_fail2ban" == "") ]]; then
   cd ~
   sudo aptitude -y install fail2ban
   sudo service fail2ban restart
-fi
-if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
+#fi
+#if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
   sudo apt-get install ufw
   sudo ufw default deny incoming
   sudo ufw default allow outgoing
   sudo ufw allow ssh
   sudo ufw allow 3595/tcp
   sudo ufw enable
-fi
+#fi
 
 #Install Daemon
 #wget https://github.com/NicholasAdmin/EDEN/releases/download/Linux/eden-ubu1604.tar.gz
@@ -115,15 +115,11 @@ sudo chmod 0600 ~/.eden/eden.conf
 #Starting coin
 (
   crontab -l 2>/dev/null
-  echo '@reboot sleep 30 && edend -daemon -shrinkdebugfile'
+  echo '@reboot sleep 30 && edend'
 ) | crontab
 (
   crontab -l 2>/dev/null
-  echo '@reboot sleep 60 && eden-cli masternode start'
-) | crontab
-(
-  crontab -l 2>/dev/null
-  echo '*/30 * * * * eden-cli sentinelping 1.1.0'
+  echo '* * * * * eden-cli sentinelping 1.1.0'
 ) | crontab
 
 echo "Coin setup complete."
