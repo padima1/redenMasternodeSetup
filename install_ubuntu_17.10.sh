@@ -32,6 +32,7 @@ echo $STRING4
 sleep 10
 
 # update package and upgrade Ubuntu
+cd ~
 sudo apt-get -y update
 sudo apt-get -y upgrade
 sudo apt-get -y autoremove
@@ -58,7 +59,7 @@ echo $STRING6
   sudo ufw default allow outgoing
   sudo ufw allow ssh
   sudo ufw allow 3595/tcp
-  sudo ufw enable
+  sudo ufw --force enable
 #fi
 
 #Install Daemon
@@ -123,6 +124,8 @@ sudo chmod 0600 ~/.eden/eden.conf
 ) | crontab
 
 echo "Coin setup complete."
+
+cd ~
 
 #Start Daemon with newly created conf file (daemon=1)
 edend
