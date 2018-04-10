@@ -71,9 +71,6 @@ sudo cp -v ~/EDEN-MN-SETUP/Eden-v1.0.0.1-ubuntu16/eden-cli /usr/bin/
 chmod +x /usr/bin/edend
 chmod +x /usr/bin/eden-cli
 
-chmod +x /usr/bin/edend
-chmod +x /usr/bin/eden-cli
-
 #Start Daemon so it will create coin directory (~/.eden)
 edend -daemon
 
