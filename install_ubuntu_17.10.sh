@@ -68,8 +68,8 @@ echo $STRING6
 #sudo rm eden-ubu1604.tar.gz
 sudo cp -v ~/EDEN-MN-SETUP/Eden-v1.0.0.1-ubuntu16/edend /usr/bin/
 sudo cp -v ~/EDEN-MN-SETUP/Eden-v1.0.0.1-ubuntu16/eden-cli /usr/bin/
-chmod +x /usr/bin/edend
-chmod +x /usr/bin/eden-cli
+sudo chmod +x /usr/bin/edend
+sudo chmod +x /usr/bin/eden-cli
 
 #Start Daemon so it will create coin directory (~/.eden)
 edend -daemon
