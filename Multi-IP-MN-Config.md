@@ -1,4 +1,4 @@
-## Running More Than One Masternode Daemon On Same VPS
+## Running More Than One Reden Masternode Daemon On Same VPS is Not Recommended, Not Endorsed and Not Supported by Reden team!
 
 NOTE: This process is more involving than the regular MN setup and is geared towards more experienced Linux user. This guide is provided as is with no warranties of any kind. 
 
