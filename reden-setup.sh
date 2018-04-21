@@ -41,13 +41,16 @@ password2=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 
 #Installing Daemon
 cd ~
-sudo rm reden_ubuntu16_1.0.0_linux.gz
-wget https://github.com/NicholasAdmin/Reden/releases/download/Wallet/reden_ubuntu16_1.0.0_linux.gz
-sudo tar -xzvf reden_ubuntu16_1.0.0_linux.gz --strip-components 1 --directory /usr/bin
-sudo rm reden_ubuntu16_1.0.0_linux.gz
 
-sudo chmod 775 /usr/bin/redend
-sudo chmod 775 /usr/bin/reden-cli
+#sudo rm reden_ubuntu16_1.0.0_linux.gz
+#wget https://github.com/NicholasAdmin/Reden/releases/download/Wallet/reden_ubuntu16_1.0.0_linux.gz
+#sudo tar -xzvf reden_ubuntu16_1.0.0_linux.gz --strip-components 1 --directory /usr/bin
+#sudo rm reden_ubuntu16_1.0.0_linux.gz
+
+# Copy binaries to /usr/bin
+sudo cp Reden-v1.0-Ubuntu16.04/reden* /usr/bin/
+
+sudo chmod 775 /usr/bin/reden*
 
 #Starting daemon first time
 redend -daemon
