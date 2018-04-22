@@ -21,8 +21,8 @@ sudo apt-get -y install libevent-dev
 
 sudo apt -y install software-properties-common
 
-sudo add-apt-repository ppa:bitcoin/bitcoin
-sudo apt-get update
+sudo add-apt-repository ppa:bitcoin/bitcoin -y
+sudo apt-get -y update
 sudo apt-get -y install libdb4.8-dev libdb4.8++-dev
 
 sudo apt-get -y install libminiupnpc-dev
