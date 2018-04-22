@@ -50,7 +50,7 @@ cd ~
 #sudo rm reden_ubuntu16_1.0.0_linux.gz
 
 # Copy binaries to /usr/bin
-sudo cp Reden-v1.0-Ubuntu16.04/reden* /usr/bin/
+sudo cp RedenMasternodeSetup/Reden-v1.0-Ubuntu16.04/reden* /usr/bin/
 
 sudo chmod 775 /usr/bin/reden*
 
