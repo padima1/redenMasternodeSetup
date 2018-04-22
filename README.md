@@ -82,7 +82,7 @@ eden-cli mnsync status
 If you are really bored waiting for the sync to complete, you can watch what masternode is doing on the network at any time by using tail to monitor the debug.log file in realtime:
 
 ```bash
-sudo tail -f ~/.eden/debug.log
+sudo tail -f ~/.redencore/debug.log
 ```
 
 In conclusion, try restarting your VPS server and see if masternode comes back online automatically. The script adds a cron job which starts edend daemon and the masternode after every reboot.
