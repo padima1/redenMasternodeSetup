@@ -6,7 +6,7 @@ If you follow the steps and use a newly created Ubuntu 16.04 VPS, it will automa
 
 Steps:
 
-0) Create a new VPS or use existing one. Recommended config is similar to vultr's $5/mo (25GB SSD/1xCPU/1GB RAM, Ubuntu 16.04). It can handle several MNs running simultaneously on the same IP address but they have to use dirfferent ports. Therefore you cannot easily run more than one EDEN MN on the same box. Different coins are fine.
+0) Create a new VPS or use existing one. Recommended config is similar to vultr's $5/mo (25GB SSD/1xCPU/1GB RAM, Ubuntu 16.04). It can handle several MNs running simultaneously on the same IP address but they have to use dirfferent ports. Therefore you cannot easily run more than one REDEN MN on the same box. Different coins are fine.
 
 1) In Windows wallet, create a new receiving address and name it mn1 for example.
 
