@@ -103,14 +103,32 @@ echo "Now, you need to finally issue a start command for your masternode in the 
 echo "1) Wait for the node wallet on this VPS to sync with other nodes on the network. Eventually the IsSynced status will change to 'true'. It may take several minutes."
 echo "2) Go to your windows wallet (hot wallet with your Reden funds) and from debug console (Tools->Debug Console) enter:"
 echo "    masternode start-alias <mymnalias>"
+echo ""
 echo "where <mymnalias> is the name of your masternode alias (without brackets) as it was entered in the masternode.conf file."
 echo "once completed please return to this VPS console and wait for the masternode status to change to 'Started'. This will indicate that your masternode is fully functional."
 echo ""
 echo "Your masternode is currently syncing in the background. When you press a key to continue, this message will self-destruct, so please memorize it!"
 echo "The following screen will display current status of this masternode and it's synchronization progress. The data will update in real time every 10 seconds. You can interrupt it at any moment by Ctrl-C."
 echo ""
-echo "If you found this script and MN setup guide helpful, please donate REDEN to: RCdYg5yq3YfymwrZi8EMBSFHxcwR7acniS"
+echo ""
+
 read -p "Press any key to continue... " -n1 -s
+cd ~
+
+echo ""
+echo "Here are some useful tools and commands for troubleshooting your masternode:"
+echo "(copy/paste without $)"
+echo ""
+echo "Redend debug log showing all MN network activity in real time:"
+echo "$ tail -f ~/.redencore/debug.log"
+echo ""
+echo "To monitor HW and system resource utilization and running processes:"
+echo "$ htop "
+echo ""
+echo "To monitor MN state and its sync status:"
+echo "$ watch -n 10 'reden-cli masternode status && reden-cli mnsync status'"
+echo ""
+echo "If you found this script and MN setup guide helpful, please donate REDEN to: RCdYg5yq3YfymwrZi8EMBSFHxcwR7acniS"
 
 watch -n 10 'reden-cli masternode status && reden-cli mnsync status'
 
