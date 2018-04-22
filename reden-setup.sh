@@ -75,9 +75,6 @@ externalip='$ip'
 
 masternode=1
 masternodeprivkey='$key'
-
-addnode=45.76.127.252
-addnode=35.178.15.243
 ' | sudo -E tee ~/.redencore/reden.conf >/dev/null 2>&1
 
 #Starting daemon second time
