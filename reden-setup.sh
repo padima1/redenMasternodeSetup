@@ -2,7 +2,9 @@
 clear
 echo "Make sure you double check before hitting enter! Only one shot at these!"
 
+read -t 1 -n 10000 discard 
 read -e -p "Server IP Address : " ip
+read -t 1 -n 10000 discard 
 read -e -p "Masternode Private Key (e.g. 28L11p9KSUQMyw5z6QYay8q68WnNxuH5BbeyAhWutwav1TSNC4S # THE KEY YOU GENERATED EARLIER) : " key
 
 clear
