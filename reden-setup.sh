@@ -3,10 +3,10 @@ clear
 echo "Make sure you double check before hitting enter! Only one shot at these!"
 
 read -e -p "Server IP Address : " ip
-read -e -p "Masternode Private Key (e.g. 7rVTLnLh9GFFrwFrudxMNcikVbf3uQTwH7PrqhTxdWzUfGtdC9f # THE KEY YOU GENERATED EARLIER) : " key
+read -e -p "Masternode Private Key (e.g. 28L11p9KSUQMyw5z6QYay8q68WnNxuH5BbeyAhWutwav1TSNC4S # THE KEY YOU GENERATED EARLIER) : " key
 
 clear
-"Updating system and installing required packages..."
+echo "Updating system and installing required packages..."
 sleep 5
 
 # update packages and upgrade Ubuntu
