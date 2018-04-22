@@ -74,9 +74,9 @@ Go back to your VPS and wait for the status of your new masternode to change to 
 Finally, to monitor your masternode status you can use:
 
 ```bash
-eden-cli masternode status
+reden-cli masternode status
 
-eden-cli mnsync status
+reden-cli mnsync status
 ```
 
 If you are really bored waiting for the sync to complete, you can watch what masternode is doing on the network at any time by using tail to monitor the debug.log file in realtime:
@@ -85,7 +85,7 @@ If you are really bored waiting for the sync to complete, you can watch what mas
 sudo tail -f ~/.redencore/debug.log
 ```
 
-In conclusion, try restarting your VPS server and see if masternode comes back online automatically. The script adds a cron job which starts edend daemon and the masternode after every reboot.
+In conclusion, try restarting your VPS server and see if masternode comes back online automatically. The script adds a cron job which starts redend daemon and the masternode after every reboot.
 
 Note that we still have 0% pool fees at https://fasterpool.com :)
 

@@ -93,10 +93,12 @@ sleep 10
   echo '@reboot sleep 30 && redend'
 ) | crontab
 
-echo "Coin setup complete."
-
 cd ~
 
+clear
+
+echo "Coin setup complete..."
+echo ""
 echo "Now, you need to finally issue a start command for your masternode in the following order:"
 echo "1) Wait for the node wallet on this VPS to sync with other nodes on the network. Eventually the IsSynced status will change to 'true'. It may take several minutes."
 echo "2) Go to your windows wallet (hot wallet with your Reden funds) and from debug console (Tools->Debug Console) enter:"
@@ -110,6 +112,6 @@ echo ""
 echo "If you found this script and MN setup guide helpful, please donate REDEN to: RCdYg5yq3YfymwrZi8EMBSFHxcwR7acniS"
 read -p "Press any key to continue... " -n1 -s
 
-watch -n 10 'sudo reden-cli masternode status && sudo reden-cli mnsync status'
+watch -n 10 'reden-cli masternode status && reden-cli mnsync status'
 
 
