@@ -110,6 +110,6 @@ echo ""
 echo "If you found this script and MN setup guide helpful, please donate REDEN to: RCdYg5yq3YfymwrZi8EMBSFHxcwR7acniS"
 read -p "Press any key to continue... " -n1 -s
 
-watch -n 10 'reden-cli masternode status && reden-cli mnsync status'
+watch -n 10 'sudo reden-cli masternode status && sudo reden-cli mnsync status'
 
 
