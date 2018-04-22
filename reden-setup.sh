@@ -65,6 +65,9 @@ echo '
 rpcuser='$password'
 rpcpassword='$password2'
 rpcallowip=127.0.0.1
+
+onlynet=ipv4
+
 listen=1
 server=1
 daemon=1
