@@ -15,6 +15,7 @@ sleep 5
 cd ~
 sudo apt-get -y update
 sudo apt-get -y upgrade
+sudo apt-get dist-upgrade -y
 sudo apt-get -y autoremove
 sudo apt-get -y install wget nano htop git
 sudo apt-get -y install libzmq3-dev
@@ -32,20 +33,37 @@ sudo apt-get -y install libminiupnpc-dev
 sudo apt-get -y install fail2ban
 sudo service fail2ban restart
 
-sudo apt-get install ufw
+sudo apt-get install ufw -y
+sudo apt-get update -y
+
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw allow ssh
 sudo ufw allow 13058/tcp
 sudo ufw --force enable
 
-#Generating Random Passwords
-password=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
-password2=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+#Generating Random Password
+rpcpassword=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+
+#Find Server Public IP Address
+PublicIP=$(curl ifconfig.co)
+
+Port='13058'
+
+#Create 2GB swap file
+echo 'Create 2GB disk swap...'
+free -h
+cd /var
+touch swap.img
+chmod 600 swap.img
+dd if=/dev/zero of=/var/swap.img bs=1024k count=2000
+mkswap /var/swap.img
+swapon /var/swap.img
+echo “/var/swap.img none swap sw 0 0” >> /etc/fstab 
+free -h
 
 #Installing Daemon
 cd ~
-
 #sudo rm reden_ubuntu16_1.0.0_linux.gz
 #wget https://github.com/NicholasAdmin/Reden/releases/download/Wallet/reden_ubuntu16_1.0.0_linux.gz
 #sudo tar -xzvf reden_ubuntu16_1.0.0_linux.gz --strip-components 1 --directory /usr/bin
@@ -54,44 +72,54 @@ cd ~
 # Copy binaries to /usr/bin
 sudo cp RedenMasternodeSetup/Reden-v1.0-Ubuntu16.04/reden* /usr/bin/
 
-sudo chmod 775 /usr/bin/reden*
+sudo chmod 755 /usr/bin/reden*
+
+#Stop daemon if it's already running
+reden-cli stop
+sleep 30
+
+#Create reden.conf
+sudo mkdir ~/.redencore
+
+cat <<EOF > ~/.redencore/reden.conf
+rpcuser=redenrpc
+rpcpassword='$rpcpassword'
+EOF
+
+sudo chmod 755 -R ~/.redencore/reden.conf
 
 #Starting daemon first time
 redend -daemon
-echo "sleep for 10 seconds..."
+echo 'sleep for 10 seconds...'
 sleep 10
+
+#Generate masternode private key
+genkey=$(reden-cli masternode genkey)
 reden-cli stop
 
-#Create eden.conf
-echo '
-rpcuser='$password'
-rpcpassword='$password2'
+cat <<EOF > ~/.redencore/reden.conf
+rpcuser=redenrpc
+rpcpassword='$rpcpassword'
 rpcallowip=127.0.0.1
-
-onlynet=ipv4
-
 listen=1
 server=1
 daemon=1
 logtimestamps=1
-maxconnections=32
-
-externalip='$ip'
-
+maxconnections=256
+externalip='$PublicIP'
 masternode=1
-masternodeprivkey='$key'
-' | sudo -E tee ~/.redencore/reden.conf >/dev/null 2>&1
+masternodeprivkey='$genkey'
+EOF
 
 #Starting daemon second time
 redend
-
 sleep 10
 
-#Starting coin
-(
-  crontab -l 2>/dev/null
-  echo '@reboot sleep 30 && redend'
-) | crontab
+#Setting auto star for daemon
+crontab -l > tempcron
+echo '@reboot sleep 30 && redend' >> tempcron
+crontab tempcron
+rm tempcron
 
 cd ~
 
@@ -99,9 +127,19 @@ clear
 
 echo "Coin setup complete..."
 echo ""
-echo "Now, you need to finally issue a start command for your masternode in the following order:"
-echo "1) Wait for the node wallet on this VPS to sync with other nodes on the network. Eventually the IsSynced status will change to 'true'. It may take several minutes."
-echo "2) Go to your windows wallet (hot wallet with your Reden funds) and from debug console (Tools->Debug Console) enter:"
+echo "Masternode installed with VPS IP Address: $PublicIP"
+echo "Masternode Private Key: $genkey"
+echo "Now, you need to add the following string to the masternode.conf file of your Hot Wallet (the wallet with your Reden funds):"
+echo ""
+echo "mn1 $PublicIP:$Port $genkey TxId TxIdx"
+echo ""
+echo "Copy the string above by selecting with mouse followed by Left-Click (Do Not use Ctrl-C) and paste into your masternodes.conf file, then replace mn1 with your desired masternode name TxId with Transaction Id from masternode outputs and TxIdx with Transaction index (0 or 1). Save masternode.conf and restart the wallet."
+echo ""
+sleep 10
+echo "Finally issue a start command for your masternode in the following order:"
+echo "1) Wait for the node wallet on this VPS to sync with other nodes on the network. Eventually the IsSynced status will change to 'true'. It may take from several minutes to hours. Initial status may read '...not in masternode list', which is normal."
+echo "2) Go to your hot wallet and from debug console (Tools->Debug Console) enter:"
+echo ""
 echo "    masternode start-alias <mymnalias>"
 echo ""
 echo "where <mymnalias> is the name of your masternode alias (without brackets) as it was entered in the masternode.conf file."
@@ -130,6 +168,5 @@ echo "$ watch -n 10 'reden-cli masternode status && reden-cli mnsync status'"
 echo ""
 echo "If you found this script and MN setup guide helpful, please donate REDEN to: RCdYg5yq3YfymwrZi8EMBSFHxcwR7acniS"
 
-watch -n 10 'reden-cli masternode status && reden-cli mnsync status'
-
+watch -n 10 'reden-cli masternode status && reden-cli mnsync status && reden-cli getinfo'
 
