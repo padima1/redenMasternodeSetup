@@ -4,10 +4,10 @@ echo "REDEN Masternode Setup Script V1.1 for Ubuntu 16.04 LTS
 Detecting public IP Address..."
 
 publicip=$(dig +short myip.opendns.com @resolver1.opendns.com)
-if [ -n $PublicIP ]; then
+if [ -n $publicip ]; then
     echo "IP Address detected:" $publicip
 else
-    echo -e "ERROR: Public IP Address is not detected!\a"
+    echo -e "ERROR: Public IP Address is not detected! \a"
     read -e -p "Enter Server Public IP Address: " publicip
 fi
 sleep 3
@@ -113,7 +113,7 @@ listen=1
 server=1
 daemon=1
 maxconnections=256
-externalip=$PublicIP
+externalip=$publicip
 masternode=1
 masternodeprivkey=$genkey
 EOF
@@ -135,14 +135,14 @@ echo "========================================================================
 Masternode setup is complete!
 ========================================================================
 
-Masternode was installed with VPS IP Address: $PublicIP
+Masternode was installed with VPS IP Address: $publicip
 
 Masternode Private Key: $genkey
 
 Now you can add the following string to the masternode.conf file
 for your Hot Wallet (the wallet with your Reden collateral funds):
 ========================================================================"
-echo "mn1 $PublicIP:$Port $genkey TxId TxIdx"
+echo "mn1 $publicip:$Port $genkey TxId TxIdx"
 echo "========================================================================
 
 Use your mouse to copy the whole string above into the clipboard by
