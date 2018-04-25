@@ -1,4 +1,6 @@
 #It is a one-liner script for now. Refresh time is 1 sec.
+dpkg -s jq 2>/dev/null >/dev/null || sudo apt-get -y install jq
+
 watch -ptn 1 "echo '=========================================================================================================
 Outbound connections to other peer nodes (from reden-cli getpeerinfo, excluding inbound connections)
 1:ID 2:NodeIP 3:Ping,ms 4:Sent,KB 5:Recvd,KB 6:StartBlk 7:HdrsSyncd 8:BlkSyncd 9:ConnTime,min 10:BanScore
@@ -14,3 +16,4 @@ echo '==========================================================================
 echo 'Masternode Information: \n# reden-cli getinfo' && reden-cli getinfo &&
 echo '========================================================================================================='
 echo '\n\nPress Ctrl-C to Exit...'"
+
