@@ -28,11 +28,12 @@ Copy it somewhere safe. You will use these in the masternode.conf file for your 
 To download (clone) the script and binaries to your VPS, use the following command in VPS Linux console:
 
 ```bash
+cd ~
 git clone https://github.com/fasterpool/RedenMasternodeSetup
 ```
 
 __NOTE:__ in case you will need to re-download this setup script or binaries from github repo, use the following git command:
-```
+```bash
 cd ~/RedenMasternodeSetup
 git fetch --all
 ```
@@ -81,11 +82,11 @@ __output-tx-index__ - this is a single-digit value (0 or 1) which is shown in th
 **NOTE:** The new MN setup script will provide this configuration string for your convenience.
 You just need to replace:
 ```bash
-	**mn1** - with your desired masternode name (alias)
+	mn1 - with your desired masternode name (alias)
 
-	**TxId** - with Transaction Id from masternode outputs
+	TxId - with Transaction Id from masternode outputs
 
-	**TxIdx** - with Transaction Index (0 or 1)
+	TxIdx - with Transaction Index (0 or 1)
 
 ```
 
@@ -150,9 +151,9 @@ listen=1
 server=1
 daemon=1
 maxconnections=256
-externalip=**144.202.92.85**
+externalip=144.202.92.85
 masternode=1
-masternodeprivkey=**2333H9uMa8wrYGb1hNotRealPKey64vr8BRYjPZP3LAR6WFGg** 
+masternodeprivkey=2333H9uMa8wrYGb1hNotRealPKey64vr8BRYjPZP3LAR6WFGg
 ```
 
 **In conclusion**
@@ -170,16 +171,16 @@ The expected output for a functioning masternode will eventually look like this:
   "vin": "CTxIn(COutPoint(cbe3c99bed2c874a14675c54004a5b5bfda8473b98bfbd80a15743c2a1117d4f, 1), scriptSig=)",
   "service": "104.207.157.213:13058",
   "payee": "RN3ZoisQkdsCuXj7799kEcvJkWk6Bhc4uJ",
-  **"status": "Masternode successfully started"**
+  "status": "Masternode successfully started"
 }
 {
   "AssetID": 999,
-  "AssetName": **"MASTERNODE_SYNC_FINISHED"**,
+  "AssetName": "MASTERNODE_SYNC_FINISHED",
   "Attempt": 0,
   "IsBlockchainSynced": true,
   "IsMasternodeListSynced": true,
   "IsWinnersListSynced": true,
-  **"IsSynced": true**,
+  "IsSynced": true,
   "IsFailed": false
 }
 ```
@@ -245,7 +246,7 @@ Your Masternode Status:
   "vin": "CTxIn(COutPoint(7a0fc6d42dfa5952cbe8063558d9ff817d39bcdeb21d49e9da79db8782ae93bb, 0), scriptSig=)",
   "service": "108.61.142.63:13058",
   "payee": "RDDFRkcFiRZc1aXVc6SZUcqKNxgBWMHAbR",
-  **"status": "Masternode successfully started"**
+  "status": "Masternode successfully started"
 }
 =========================================================================================================
 Sync Status:
@@ -257,7 +258,7 @@ Sync Status:
   "IsBlockchainSynced": true,
   "IsMasternodeListSynced": true,
   "IsWinnersListSynced": true,
-  **"IsSynced": true**,
+  "IsSynced": true,
   "IsFailed": false
 }
 =========================================================================================================
@@ -271,7 +272,7 @@ Masternode Information:
   "privatesend_balance": 0.00000000,
   "blocks": 2551,
   "timeoffset": 0,
-  **"connections": 256**,
+  "connections": 256,
   "proxy": "",
   "difficulty": 343.4593731447172,
   "testnet": false,
@@ -293,9 +294,9 @@ Press Ctrl-C to Exit...
 
 If you found this script and masternode setup guide helpful...
 
-...please donate REDEN to: RCdYg5yq3YfymwrZi8EMBSFHxcwR7acniS
+...please donate REDEN to: **RCdYg5yq3YfymwrZi8EMBSFHxcwR7acniS**
 
-or just come to our pool to mine REDEN: https://fasterpool.com
+or just come to our pool to mine REDEN: https://fasterpool.com 
 We have low 0.5% charity fee, which goes to the REDEN dev fund!
 
 --Allroad
