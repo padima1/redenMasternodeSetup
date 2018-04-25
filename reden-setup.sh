@@ -123,10 +123,10 @@ redend
 
 #Setting auto star cron job for redend
 echo 'Configuring crontab job...'
-cronjob='@reboot sleep 30 && redenddd'
+cronjob='@reboot sleep 30 && redend'
 crontab -l > tempcron
 if ! grep -q "$cronjob" tempcron; then
-	echo $cronstr >> tempcron
+	echo $cronjob >> tempcron
 	crontab tempcron
 fi
 rm tempcron
