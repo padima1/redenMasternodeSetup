@@ -188,7 +188,7 @@ Typically you should see more than a few nodes listed in the table and the amoun
 Currently Reden nodes will display most (if not all) peers with IPv6 addresses. This is normal as long as the data is being transferred and peers stay connected for a long time.
 
 Sample output of the script from node 108.61.142.63 on Apr-24th 2018:
-
+```
 =========================================================================================================
 Outbound connections to other peer nodes (from reden-cli getpeerinfo, excluding inbound connections)
 1:ID 2:NodeIP 3:Ping,ms 4:Sent,KB 5:Recvd,KB 6:StartBlk 7:HdrsSyncd 8:BlkSyncd 9:ConnTime,min 10:BanScore
@@ -280,7 +280,7 @@ Masternode Information:
 
 
 Press Ctrl-C to Exit...
-
+```
 
 * * *
 
