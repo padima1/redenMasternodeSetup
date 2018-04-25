@@ -1,82 +1,76 @@
 ## Installation
 
-NOTE: This installation guide is provided as is with no warranties of any kind.
+**NOTE:** This installation guide is provided as is with no warranties of any kind.
 
-If you follow the steps and use a newly created Ubuntu 16.04 VPS, it will automatically configure and start your Master Node. You will need to input your public VPS IP address and masternode private key.
+**NOTE:** Newer version of the script (v1.1) does not ask for IP address or masternode genkey anymore. Instead the __script will detect VPS IP Address and generate the private key automatically__
+
+If you follow the steps and use a newly installed Ubuntu 16.04 VPS, it will automatically configure and start your Master Node. Ubuntu 17.10 and other Linux distros ate not currently supported.
 
 Steps:
 
-0) Create a new VPS or use existing one. Recommended config is similar to vultr's $5/mo (25GB SSD/1xCPU/1GB RAM, Ubuntu 16.04). It can handle several MNs running simultaneously on the same IP address but they have to use dirfferent ports. Therefore you cannot easily run more than one REDEN MN on the same box. Different coins are fine.
+0) Create a new VPS or use existing one. Recommended VPS resource configuration is similar to the vultr's $5/mo (25GB SSD/1xCPU/1GB RAM, Ubuntu 16.04). It can handle several MNs running simultaneously on the same public IP address but they have to use dirfferent ports. Therefore you cannot easily run more than one REDEN MN on the same box. Different coins are fine.
 
-1) In Windows wallet, create a new receiving address and name it mn1 for example.
+1) In Windows wallet, create a new receiving address and name it **mn1** for example.
 
-2) Send exactly 5000 REDEN to this new address. NOTE: if you are setting up many msternodes and wish to perform multiple 5k payments in a row before following through steps (3-8), make sure you select correct __inputs__ for each payment or __lock__ your 5k coins manually after each payment using Coin Control Features, otherwise your coins may get reused and only last payment will yield valid masternode output. The wallet will lock your payments automatically after you restart it in step (8).
+2) Send exactly 5000 REDEN to this new address. NOTE: if you are setting up many msternodes and wish to perform multiple 5k payments in a row before following through steps (3-7), make sure you select correct __inputs__ for each payment or __lock__ your 5k coins manually after each payment using Coin Control Features, otherwise your coins may get reused and only last payment will yield valid masternode output. The wallet will lock your payments automatically after you restart it in step (7).
 
-3) View your Output transaction ID in in Debug Console (Tools -> Debug console):
+3) **View masternode outputs** - output transaction ID and transaction index in wallet Debug Console (Tools -> Debug console) by typing:
 
 ```bash
 masternode outputs
 ```
 
-Write this down or copy it somewhere safe. You will use this in the masternode.conf file for your Windows wallet later.
+Copy it somewhere safe. You will use these in the masternode.conf file for your wallet later.
 
-5) SSH (Putty Suggested) to your VPS server console, login as root and clone the script Github repository.
-(NOTE: Currently this repo contains Linux wallet binaries wich are necessary to run master node on VPS. The location of these binaries will be changed to the official release github folder at a later date)
+4) **Connect to your VPS server console** using PuTTY terminal program, login as root and clone the setup script and wallet binaries from github repository.
+(NOTE: Currently this script repo contains Linux wallet binaries wich are necessary to run master node on VPS. The location of these binaries will be changed to the official release github folder at a later date)
+
+To download (clone) the script and binaries to your VPS, use the following command in VPS Linux console:
 
 ```bash
 git clone https://github.com/fasterpool/RedenMasternodeSetup
 ```
-6) Navigate to the cloned install folder:
 
-```bash
-cd RedenMasternodeSetup
+__NOTE:__ in case you will need to re-download this setup script or binaries from github repo, use the following git command:
+```
+cd ~/RedenMasternodeSetup
+git fetch --all
 ```
 
-7) Run the bash script which will install & configure your master node with all necessary options.
-
-For Ubuntu 16.04 (not compatible with Ubuntu 17.10!)
+5) **Run the install script** which will install and configure your masternode with all necessary options.
 
 ```bash
+cd ~/RedenMasternodeSetup
 bash reden-setup.sh
 ```
+__NOTE:__ This process may take anywhere from 5 to 20 minutes, depending on your VPS HW specs. If it's not your very first ever masternode setup, you may want to speed up the process by doing things in parallel. While the MN setup script is running on the VPS, you can spend this time getting ready to start your new masternode from your Hot Wallet (also referred to as Control Wallet) by following instructions in next step (6).
 
-Once done, the VPS will ask you to start your masternode in your Windows wallet. Follow instructions on the VPS console.
+Once the script completes, it will output your VPS Public IP Address and masternode Private Key which it generated for this masternode. Detailed instructions on what to do next will be provided on the VPS console.
 
-NOTE: If it's not your very first ever masternode setup, you may speed up the process by doing things in parallel. While the MN setup script is running on the VPS, which may take anywhere from 5 to 20 minutes, depending on your VPS HW specs, you can spend this time getting ready to start your new masternode from your Hot Wallet (also referred to as Control Wallet) by following instructions in next step (8).
+6) **Prepare your Hot Wallet and start the new masternode**. In this step you will introduce your new masternode to the Reden network by issuing a masternode start command from your wallet, which will broadcast information proving that
+the collateral for this masternode is secured in your wallet. Without this step your new masternode will function as a regular Reden node (wallet) and will not yield any rewards. Usually you keep your Hot Wallet on your Windows machine where you securely store your funds for the MN collateral.
 
-8) Now it's time to prepare your Hot Wallet and start the new masternode. Without this step your new masternode will function as a regular node and not yield any rewards. Usually you keep this Hot Wallet on your Windows machine where you store your funds for MN collateral. 
-Basically, all you need to do is just enter masternode parameters into the __masternode.conf__ text file located in your wallet __data directory__. There are two ways to find this file. The easiest way is to open the file in Notepad from within the wallet (Tools -> Open Masternode Configuration File). Optionally, you can open it from the wallet datafolder directly in Windows Explorer by navigating to the %appdata%/roaming/redencore (hit Win+R, paste %appdata%/roaming/redencore, hit Enter) and then just opening masternode.conf with Notepad for editing. 
+Basically all you need to do is just edit the __masternode.conf__ text file located in your hot wallet __data directory__ to enter a few masternode parameters, restart the wallet and then issue a start command for this new masternode.
 
-It does not matter which way you open the file or how you edit it. In either case you will need to restart your wallet when you are done in order for it to pickup the changes you made in the file. Just make sure to save it before you restart your wallet.
+There are two ways to edit __masternode.conf__. The easiest way is to open the file from within the wallet app (Tools -> Open Masternode Configuration File). Optionally, you can open it from the wallet data folder directly by navigating to the %appdata%/roaming/redencore. Just hit Win+R, paste %appdata%/roaming/redencore, hit Enter and then open **masternode.conf** with Notepad for editing. 
+
+It does not matter which way you open the file or how you edit it. In either case you will need to restart your wallet when you are done in order for it to pickup the changes you made in the file. Make sure to save it before you restart your wallet.
 
 Here's what you need to do in masternode.conf file. For each masternode you are going to setup, you need to enter one separate line of text  which will look like this:
 
-Example:
 ```bash
 mn1 231.321.11.22:13058 27KTCRKgqjBgQbAS2BN9uX8GHBu16wXfr4z4hNDZWQAubqD8fr6 5d46f69f1770cb051baf594d011f8fa5e12b502ff18509492de28adfe2bbd229 0
 ```
 
-NOTE: The new MN setup script will provide this configuration line for your convenience. 
-You just need to replace:
-```bash
-	'mn1' - with your desired masternode name (alias)
-
-	'TxId' - with Transaction Id from masternode outputs
-
-	'TxIdx' - with Transaction Index (0 or 1)
-
-```
-
-NOTE: use only one space between the elements in each line, don't use TABs.
-
-Line format is as follow:
+The format for this string is as follow:
 ```bash
 masternodealias publicipaddress:13058 masternodeprivatekey output-tx-ID output-tx-index
 ```
-Where:
-__masternodealias__ - your human readable masternode name (alias) which you use to address the masternode. It can be any unique name as long as you can recognize it. It exists only in your wallet and has no impact on MN functionality.
 
-__publicipaddress:13058__ - this must be your masternode public IP address, which is usually the IP address of your VPS, accessible from the Internet. The new script (v1.1) will detect your IP address automatically. The __:13058__ suffix is the predefined and fixed TCP port which is used in Reden network for node-to-node and wallet-to-node communications. This port needs to be opened on your VPS server firewall so that others can talk to your masternode. The setup script takes care of it. NOTE: some VPS service providers may have additional firewall on their network which you may need to configure to open TCP port  13058. Vultr does not require this.
+Where:
+__masternodealias__ - your human readable masternode name (alias) which you use to identify the masternode. It can be any unique name as long as you can recognize it. It exists only in your wallet and has no impact on the masternode functionality.
+
+__publicipaddress:13058__ - this must be your masternode public IP address, which is usually the IP address of your VPS, accessible from the Internet. The new script (v1.1) will detect your IP address automatically. The __:13058__ suffix is the predefined and fixed TCP port which is being used in Reden network for node-to-node and wallet-to-node communications. This port needs to be opened on your VPS server firewall so that others can talk to your masternode. The setup script takes care of it. NOTE: some VPS service providers may have additional firewall on their network which you may need to configure to open TCP port  13058. Vultr does not require this.
 
 __masternodeprivatekey__ - this is your masternode private key which script will generate automatically. Each masternode will use its own unique private key to maintain secure communication with your Hot Wallet. You will have to generate a new key for each masternode you are setting up. Only your masternode and your hot wallet will be in possession of this private key. In case if you will need to change this key later for some reason, you will have to update it in your __masternode.conf__ in Hot Wallet as well as in the reden.conf in data directory on the masternode VPS.
 
@@ -84,13 +78,26 @@ __output-tx-ID__ - this is your collateral payment Transaction ID which is uniqu
 
 __output-tx-index__ - this is a single-digit value (0 or 1) which is shown in the **masternode outputs**
 
+**NOTE:** The new MN setup script will provide this configuration string for your convenience.
+You just need to replace:
+```bash
+	**mn1** - with your desired masternode name (alias)
+
+	**TxId** - with Transaction Id from masternode outputs
+
+	**TxIdx** - with Transaction Index (0 or 1)
+
+```
+
+Use only one space between the elements in each line, don't use TABs.
+
 Once you think you are all done editing masternode.conf file, please make sure you save the changes!
 
 IMPORTANT: Spend some time and double check each value you just entered. Copy/paste mistakes will cause your masternode (or other nodes) to behave erratically and will be extremely difficult to troubleshoot. Make sure you don't have any duplicates in the list of masternodes. Often people tend to speed up the process and copy the previous line and then forget to modify the IP address or copy the IP address partially. If anything goes wrong with the masternode later, the masternode.conf file should be your primary suspect in any investigation.
 
-Finally, you need to either __restart__ or open up the wallet app, unlock with your encryption password. At this point the wallet app will read your __masternode.conf__ file and populate the Masternodes tab. Newly added nodes will show up as MISSING, which is normal.
+Finally, you need to either __restart__ the wallet app, unlock it with your encryption password. At this point the wallet app will read your __masternode.conf__ file and populate the Masternodes tab. Newly added nodes will show up as MISSING, which is normal.
 
-If your masternode setup script has finished synchronization with the network, you can issue a start broadcast from your hot wallet to tell the others on Reden network about your new masternode.
+Once the wallet is fully synchronized and your masternode setup script on VPS has finished its synchronization with the network, you can issue a start broadcast from your hot wallet to tell the others on Reden network about your new masternode.
 
 Todo so you can either run a simple command in Debug Console (Tools -> Debug console):
 
@@ -103,9 +110,13 @@ Example:
 masternode start-alias mn1
 ```
 
-Or, as an alternative, you can issue a start broadcast from the wallet Masternodes tab by right-clicking on the node.
+Or, as an alternative, you can issue a start broadcast from the wallet Masternodes tab by right-clicking on the node:
 
-If masternode collateral payment was done properly, it will indicate that the masternode has been started successfully. This only means that the conditions to start were met and that start command was communicated to peers.
+```bash
+Masternodes -> Select masternode -> RightClick -> start alias
+```
+
+The wallet should respond tith "masternode started successfully" as long as the masternode collateral payment was done correctly in step (2) and it had at least 15 confirmations. This only means that the conditions to send the start broadcast are satisfied and that the start command was communicated to peers.
 
 Go back to your VPS and wait for the status of your new masternode to change to "Masternode successfully started". This may take some time and you may need to wait for several hours until your new masternode completes sync process.
 
@@ -125,27 +136,21 @@ sudo tail -f ~/.redencore/debug.log
 
 And for those who wonder what does reden.conf file looks like for a typical masternode which the setup script generates, here's an example below...
 
-Note that both, the __externalip__ should match the IP address and __masternodeprivkey__ should math the private key in your  __masternode.conf__ of your hot wallet in order for the masternode to function properly. If any of these two parameters change, they must be changed in both, the reden.conf on VPS (located in /root/.redencore directory) and masternode.conf on Hot Wallet PC (located in %appdata%/redencore folder).
+Note that both, the __externalip__ should match the IP address and __masternodeprivkey__ should math the private key in your  __masternode.conf__ of your hot wallet in order for the masternode to function properly. If any of these two parameters change, they must be changed in both, the reden.conf file on the masternode VPS (located in /root/.redencore directory) and masternode.conf on Hot Wallet PC (located in %appdata%/redencore folder).
 
 Example: 
 
 $ nano /root/.redencore/reden.conf
 
 ```
-rpcuser=rRXlZyarf0RANDOMUSERNAMEVA4xAeLvQA4ly
+rpcuser=redenrpc
 rpcpassword=APQsN6waRANDOMPASSWORDYaFGhecQiAn
 rpcallowip=127.0.0.1
-
-onlynet=ipv4
-
 listen=1
 server=1
 daemon=1
-logtimestamps=1
-maxconnections=32
-
+maxconnections=256
 externalip=144.202.92.85
-
 masternode=1
 masternodeprivkey=2333H9uMa8wrYGb1hNotRealPKey64vr8BRYjPZP3LAR6WFGg 
 ```
@@ -181,11 +186,11 @@ The expected output for a functioning masternode will eventually look like this:
 
 **Advanced masternode monitoring script: nodemon.sh**
 
-The main purpose of this simple script is to monitor masternode peer connections in real-time. It will display all current __outbound__ connections from your masternode with great amount of statistis which can be used for troubleshooting.
+The main purpose of this simple script is to monitor masternode status and peer connections in real-time. It will display all current __outbound__ connections of your masternode with great amount of statistis which can be used for troubleshooting of sync issues.
 
 Typically you should see more than a few nodes listed in the table and the amount of data sent/received should be updating every several seconds on a healthy masternode.
 
-Currently Reden nodes will display most (if not all) peers with IPv6 addresses. This is normal as long as the data is being transferred and peers stay connected for a long time.
+Currently Reden nodes will display most (if not all) peers with IPv6 addresses. This is normal as long as the data is being transferred and peers stay connected for a long time. Initially, when the node is just started, the outbound connection table may not show any peers for quite some time. It may take several hours to build up a healthy and stable list of peers.
 
 Sample output of the script from node 108.61.142.63 on Apr-24th 2018:
 ```
@@ -294,5 +299,3 @@ or just come to our pool to mine REDEN: https://fasterpool.com
 We have low 0.5% charity fee, which goes to the REDEN dev fund!
 
 --Allroad
-
-
