@@ -10,12 +10,6 @@ else
     echo -e "ERROR: Public IP Address is not detected!\a"
     read -e -p "Enter Server Public IP Address: " publicip
 fi
-
-echo -e "Hello \nworld"
-echo 'Hello\n 
-world'
-echo Hello$'\n'world
-exit 1
 sleep 3
 
 echo "Updating system and installing required packages..."
