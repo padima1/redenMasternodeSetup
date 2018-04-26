@@ -2,7 +2,7 @@
 
 **NOTE:** This installation guide is provided as is with no warranties of any kind.
 
-**NOTE:** Newer version of the script (v1.1) does not ask for IP address or masternode genkey anymore. Instead the __script will detect VPS IP Address and generate the private key automatically__
+**NOTE:** This newer version of the script (v1.1) does not ask for IP address or masternode genkey anymore. Instead the __script will detect VPS IP Address and generate Masternode Private Key (genkey) automatically__. It will also create a 2GB swap file.
 
 If you follow the steps and use a newly installed Ubuntu 16.04 VPS, it will automatically configure and start your Master Node. Ubuntu 17.10 and other Linux distros ate not currently supported.
 
@@ -12,7 +12,7 @@ Steps:
 
 **1)** In Windows wallet, **create a new receiving address** and name it **mn1** for example.
 
-**2) Send exactly 5000 REDEN to this new address**. NOTE: if you are setting up many msternodes and wish to perform multiple 5k payments in a row before following through steps (3-7), make sure you select correct __inputs__ for each payment or __lock__ your 5k coins manually after each payment using Coin Control Features, otherwise your coins may get reused and only last payment will yield valid masternode output. The wallet will lock your payments automatically after you restart it in step (7).
+**2) Send exactly 5000 REDEN to this new address**. NOTE: if you are setting up many msternodes and wish to perform multiple 5k payments in a row before following through steps (3)-(6), make sure you select correct __inputs__ for each payment or __lock__ your 5k coins manually after each payment using Coin Control Features, otherwise your coins may get reused and only last payment will yield valid masternode output. The wallet will lock your payments automatically after you restart it in step (6).
 
 **3) View masternode outputs** - output transaction ID and transaction index in wallet Debug Console (Tools -> Debug console) by typing:
 
@@ -32,10 +32,11 @@ cd ~
 git clone https://github.com/fasterpool/RedenMasternodeSetup
 ```
 
-__NOTE:__ in case you will need to re-download this setup script or binaries from github repo, use the following git command:
+__NOTE:__ in case if you will need to re-download this setup script or binaries from github repo, use the following git command:
 ```bash
 cd ~/RedenMasternodeSetup
-git fetch --all
+git reset --hard
+git pull
 ```
 
 **5) Run the install script** which will install and configure your masternode with all necessary options.
@@ -194,64 +195,41 @@ Typically you should see more than a few nodes listed in the table and the amoun
 
 Currently Reden nodes will display most (if not all) peers with IPv6 addresses. This is normal as long as the data is being transferred and peers stay connected for a long time. Initially, when the node is just started, the outbound connection table may not show any peers for quite some time. It may take several hours to build up a healthy and stable list of peers.
 
-Sample output of the script from node 108.61.142.63 on Apr-24th 2018:
+Sample output of the script from node 108.61.142.63 on Apr-26th 2018:
 ```
-====================================================================================================
-Outbound connections to other peer nodes (from reden-cli getpeerinfo, excluding inbound connections)
-====================================================================================================
-ID     Node IP                                        Ping   Rx/Tx    Since Hdrs  Height Time  Ban
-       Address                                        (ms)  (KBytes)  Block Syncd Blocks (min) Score
-====================================================================================================
-697   [2001:0:9d38:6abd:28f4:3d6a:a0ae:3275]:13058     157  6348/9614  1987  3211  3211  2605  0
-764   [2001:0:4137:9e76:3085:2850:9eb9:dc70]:13058     78   6943/9801  1994  3206  3206  2588  0
-885   [2001:0:9d38:90d7:2829:fbff:2a2a:24a5]:13058     96   6016/6619  2008  3206  3206  2557  0
-914   [2001:0:9d38:6abd:38a4:1f88:ae3a:61b6]:13058     136  6086/6948  2010  3206  3206  2550  0
-1198  [2601:803:401:f2c3:22:c243:f4c0:7423]:13058      115  5716/5981  2092  3216  3216  2376  0
-1212  [2001:0:9d38:6ab8:3c63:2490:3f4b:7194]:13058     334  6171/7774  2094  3206  3206  2370  0
-1241  [2001:0:9d38:6abd:1817:e3e:86f9:959a]:13058      252  6055/7458  2096  3211  3211  2365  0
-1375  [2a02:2f0b:a010:851:89ba:6f9e:8119:e34a]:13058   115  5211/6410  2132  3204  3204  2276  0
-1652  [2405:4800:309f:cf5:518d:b305:cd5e:7b67]:13058   285  5228/5630  2159  3211  3211  2225  0
-2033  [2001:0:9d38:6ab8:800:fa17:9143:567]:13058       249  5689/7521  2222  3211  3211  2092  0
-2130  [2001:0:9d38:6ab8:1c47:3686:a14b:7f62]:13058     138  4938/5291  2231  3206  3206  2081  0
-2230  [2001:0:5ef5:79fb:2868:4aec:b9ac:8475]:13058     32   5272/6697  2249  3206  3206  2038  0
-2429  [2001:0:9d38:953c:cac:34db:b49e:9dbe]:13058      84   5229/6632  2268  3216  3216  1989  10
-2929  [2001:0:5ef5:79fd:c2:219e:a00b:61d6]:13058       125  4322/4879  2377  3206  3206  1769  0
-3180  [2001:0:5ef5:79fb:1042:3489:39ab:32b8]:13058     47   4219/5173  2429  3216  3216  1649  0
-4214  [2001:0:9d38:6ab8:2cf1:67a:8da9:20cd]:13058      313  3011/3361  2633  3215  3215  1234  0
-4566  [2001:0:9d38:953c:45d:b7d3:8eb8:d408]:13058      219  3397/4185  2696  3211  3211  1099  0
-5061  [2001:0:5ef5:79fb:3016:2260:4b69:f6f5]:13058     241  2241/2686  2764  3211  3211  952   0
-5078  [2001:0:5ef5:79fb:18b2:1417:e748:bbca]:13058     56   2485/3004  2765  3209  3209  948   0
-5521  [2001:0:9d38:953c:1c9c:1f9d:77c1:d36b]:13058     51   1875/2199  2868  3185  3185  735   0
-5530  [2001:0:9d38:953c:5a:1fdf:93c7:3ef6]:13058       14   2164/3050  2868  3199  3199  733   0
-5743  [2001:0:9d38:90d7:3474:fbff:47e9:aa96]:13058     936  1723/2279  2916  3211  3211  628   0
-5827  [2001:0:9d38:6ab8:c1c:2a01:d15a:c180]:13058      165  1640/2078  2927  3211  3211  609   0
-5842  [2001:0:9d38:90d7:2065:12cd:a69d:4632]:13058     102  1656/2162  2932  3186  3186  602   0
-5847  [2001:0:5ef5:79fd:30ba:3ba6:4dac:3f74]:13058     99   1578/1945  2933  3184  3184  598   0
-5884  [2001:0:9d38:90d7:422:8fdf:2032:cd36]:13058      279  1404/1612  2952  3211  3211  558   0
-5886  [2001:0:9d38:6abd:c63:1971:d16a:466b]:13058      112  1528/1986  2954  3186  3186  557   0
-5905  [2001:0:9d38:6abd:3c12:17ab:3e4d:1ba6]:13058     117  1464/1829  2958  3184  3184  547   0
-5969  [2001:0:9d38:78cf:2c5f:295e:4319:d124]:13058     123  1353/1662  2969  3184  3184  519   0
-6184  [2001:0:9d38:953c:384a:21e:4d6b:8a48]:13058      121  1188/1543  3013  3184  3184  437   0
-6365  141.101.14.64:13058                              132  837/831    3055  3211  3211  343   0
-6463  [2001:0:9d38:90d7:343d:38c7:b4b8:d023]:13058     74   762/860    3077  3199  3199  295   0
-6467  [2001:0:9d38:953c:205e:83f:be80:a25d]:13058      48   788/935    3077  3213  3213  293   0
-6533  144.202.90.200:13058                             74   644/661    3098  3210  3210  257   0
-6823  [2001:0:9d38:90d7:1cfa:2467:549a:b63d]:13058     262  282/353    3175  3211  3211  91    0
-6958  [2001:0:9d38:78cf:141e:1e2b:a842:5b65]:13058     112  130/127    3204  3213  3213  40    0
-6994  [2001:0:9d38:90d7:34b2:8c3:9157:c3f1]:13058      272  84/72      3210  3211  3211  20    0
-7016  [2001:0:9d38:90d7:3893:35be:2033:cd2]:13058      307  67/42      3213  3213  3213  17    0
-7052  [2405:9800:bc00:2fd8:b984:f685:545b:ddf9]:13058  251  45/17      3213  3213  3213  6     0
-7069  [2001:0:5ef5:79fb:46d:2512:b171:eb92]:13058      185  34/5       3215  3215  3215  1     0
-====================================================================================================
+===========================================================================
+Outbound connections to other nodes (source: getpeerinfo, inbound excluded)
+===========================================================================
+Node IP                Ping   Rx/Tx     Since  Hdrs   Height  Time   Ban
+Address                (ms)  (KBytes)   Block  Syncd  Blocks  (min)  Score
+===========================================================================
+95.171.6.105:13058     119   6361/7285  2586   3621   3621    2190   0
+24.176.52.93:13058     38    5351/6212  2614   3625   3625    2129   0
+38.103.14.19:13058     8     8992/7278  2657   3625   3625    2037   0
+185.109.54.242:13058   133   4331/4376  2796   3624   3624    1737   0
+203.210.232.37:13058   260   3813/3874  2893   3621   3621    1545   0
+103.6.54.182:13058     280   2184/2224  3182   3621   3621    940    0
+139.99.192.39:13058    215   2170/2190  3185   3621   3621    929    0
+123.207.49.41:13058    275   2111/2038  3213   3624   3624    866    0
+159.65.152.125:13058   213   1902/1934  3246   3621   3621    797    0
+58.211.255.114:13058   1484  1552/1521  3315   3621   3621    647    0
+141.101.14.64:13058    125   1772/1542  3352   3621   3621    576    0
+192.186.142.122:13058  13    1373/1190  3406   3625   3625    453    0
+167.88.162.203:13058   64    423/351    3561   3625   3625    133    0
+144.202.109.173:13058  91    336/269    3572   3624   3624    102    0
+154.127.122.150:13058  295   205/213    3581   3622   3622    89     0
+45.77.42.248:13058     254   129/102    3600   3621   3621    41     0
+===========================================================================
 Your Masternode Status:
 # reden-cli masternode status
 {
-  "vin": "CTxIn(COutPoint(7a0fc6d42dfa5952cbe8063558d9ff817d39bcdeb21d49e9da79db8782ae93bb, 0), scriptSig=)",
-  "service": "108.61.142.63:13058",
-  "payee": "RDDFRkcFiRZc1aXVc6SZUcqKNxgBWMHAbR",
+  "vin": "CTxIn(COutPoint(0a5afa9e8c41d003c4399f089bc54880e05ce8a051d30932d236ba12b5d1040b, 0), scriptSig=
+)",
+  "service": "45.76.12.139:13058",
+  "payee": "RXzYZLmj9D6o6XtdK3M3xY2xCfNTSW464m",
   "status": "Masternode successfully started"
 }
-====================================================================================================
+===========================================================================
 Sync Status:
 # reden-cli mnsync status
 {
@@ -264,7 +242,7 @@ Sync Status:
   "IsSynced": true,
   "IsFailed": false
 }
-====================================================================================================
+===========================================================================
 Masternode Information:
 # reden-cli getinfo
 {
@@ -273,22 +251,23 @@ Masternode Information:
   "walletversion": 61000,
   "balance": 0.00000000,
   "privatesend_balance": 0.00000000,
-  "blocks": 3216,
+  "blocks": 3625,
   "timeoffset": 0,
-  "connections": 256,
+  "connections": 16,
   "proxy": "",
-  "difficulty": 429.6716693131179,
+  "difficulty": 347.7810945273632,
   "testnet": false,
-  "keypoololdest": 1524553866,
+  "keypoololdest": 1524361411,
   "keypoolsize": 1001,
   "paytxfee": 0.00000000,
   "relayfee": 0.00010000,
   "errors": ""
 }
-====================================================================================================
+===========================================================================
 
 
 Press Ctrl-C to Exit...
+
 ```
 
 * * *
