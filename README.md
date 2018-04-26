@@ -195,43 +195,42 @@ Typically you should see more than a few nodes listed in the table and the amoun
 
 Currently Reden nodes will display most (if not all) peers with IPv6 addresses. This is normal as long as the data is being transferred and peers stay connected for a long time. Initially, when the node is just started, the outbound connection table may not show any peers for quite some time. It may take several hours to build up a healthy and stable list of peers.
 
-Sample output of the script from node 108.61.142.63 on Apr-26th 2018:
+Sample output of the script from node 45.76.12.139 on Apr-26th 2018:
 ```
 ===========================================================================
-Outbound connections to other nodes (source: getpeerinfo, inbound excluded)
+Outbound connections to other Reden nodes [reden datadir: /root/.redencore]
 ===========================================================================
-Node IP                Ping   Rx/Tx     Since  Hdrs   Height  Time   Ban
-Address                (ms)  (KBytes)   Block  Syncd  Blocks  (min)  Score
+Node IP               Ping    Rx/Tx     Since  Hdrs   Height  Time   Ban
+Address               (ms)   (KBytes)   Block  Syncd  Blocks  (min)  Score
 ===========================================================================
-95.171.6.105:13058     119   6361/7285  2586   3621   3621    2190   0
-24.176.52.93:13058     38    5351/6212  2614   3625   3625    2129   0
-38.103.14.19:13058     8     8992/7278  2657   3625   3625    2037   0
-185.109.54.242:13058   133   4331/4376  2796   3624   3624    1737   0
-203.210.232.37:13058   260   3813/3874  2893   3621   3621    1545   0
-103.6.54.182:13058     280   2184/2224  3182   3621   3621    940    0
-139.99.192.39:13058    215   2170/2190  3185   3621   3621    929    0
-123.207.49.41:13058    275   2111/2038  3213   3624   3624    866    0
-159.65.152.125:13058   213   1902/1934  3246   3621   3621    797    0
-58.211.255.114:13058   1484  1552/1521  3315   3621   3621    647    0
-141.101.14.64:13058    125   1772/1542  3352   3621   3621    576    0
-192.186.142.122:13058  13    1373/1190  3406   3625   3625    453    0
-167.88.162.203:13058   64    423/351    3561   3625   3625    133    0
-144.202.109.173:13058  91    336/269    3572   3624   3624    102    0
-154.127.122.150:13058  295   205/213    3581   3622   3622    89     0
-45.77.42.248:13058     254   129/102    3600   3621   3621    41     0
+95.171.6.105:13058     118   6818/7929  2586   3706   3706    2361   0
+24.176.52.93:13058     37    5770/6829  2614   3706   3706    2301   0
+38.103.14.19:13058     8     9787/8024  2657   3706   3706    2208   0
+185.109.54.242:13058   134   4765/4824  2796   3706   3706    1908   0
+203.210.232.37:13058   261   4227/4316  2893   3706   3706    1716   0
+103.6.54.182:13058     279   2584/2638  3182   3706   3706    1111   0
+139.99.192.39:13058    209   2569/2595  3185   3706   3706    1100   0
+123.207.49.41:13058    275   2522/2462  3213   3706   3706    1037   0
+159.65.152.125:13058   217   2305/2363  3246   3681   3681    968    0
+141.101.14.64:13058    126   2319/2015  3352   3706   3706    747    0
+192.186.142.122:13058  12    1965/1673  3406   3705   3705    624    0
+144.202.109.173:13058  97    889/728    3572   3706   3706    273    0
+154.127.122.150:13058  295   572/622    3581   3669   3669    260    0
+45.77.42.248:13058     265   147/126    3681   3706   3706    52     0
 ===========================================================================
-Your Masternode Status:
-# reden-cli masternode status
+ 22:14:21 up 3 days, 22:59,  3 users,  load average: 0.01, 0.03, 0.00
+===========================================================================
+Masternode Status:
+# reden-cli -datadir=/root/.redencore masternode status
 {
-  "vin": "CTxIn(COutPoint(0a5afa9e8c41d003c4399f089bc54880e05ce8a051d30932d236ba12b5d1040b, 0), scriptSig=
-)",
+  "vin": "CTxIn(COutPoint(0a5afa9e8c41d003c4399f089bc54880e05ce8a051d30932d236ba12b5d1040b, 0), scriptSig=)",
   "service": "45.76.12.139:13058",
   "payee": "RXzYZLmj9D6o6XtdK3M3xY2xCfNTSW464m",
   "status": "Masternode successfully started"
 }
 ===========================================================================
 Sync Status:
-# reden-cli mnsync status
+# reden-cli -datadir=/root/.redencore mnsync status
 {
   "AssetID": 999,
   "AssetName": "MASTERNODE_SYNC_FINISHED",
@@ -244,18 +243,18 @@ Sync Status:
 }
 ===========================================================================
 Masternode Information:
-# reden-cli getinfo
+# reden-cli -datadir=/root/.redencore getinfo
 {
   "version": 2000001,
   "protocolversion": 70206,
   "walletversion": 61000,
   "balance": 0.00000000,
   "privatesend_balance": 0.00000000,
-  "blocks": 3625,
+  "blocks": 3706,
   "timeoffset": 0,
-  "connections": 16,
+  "connections": 14,
   "proxy": "",
-  "difficulty": 347.7810945273632,
+  "difficulty": 394.7427119361897,
   "testnet": false,
   "keypoololdest": 1524361411,
   "keypoolsize": 1001,
@@ -264,6 +263,8 @@ Masternode Information:
   "errors": ""
 }
 ===========================================================================
+Usage: nodemon.sh [refresh delay] [datadir index]
+Example: nodemon.sh 10 22 will run every 10 seconds and query redend in /root/.redencore22
 
 
 Press Ctrl-C to Exit...
