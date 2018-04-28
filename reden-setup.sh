@@ -2,9 +2,8 @@
 # REDEN Masternode Setup Script V1.1 for Ubuntu 16.04 LTS
 
 # Clears keyboard input buffer
-function clear_stdin { while read -r -t 0 do; read -r; done; }
+function clear_stdin { while read -r -t 0; do read -r; done; }
 
-#####################################################
 clear
 echo "Updating system and installing required packages..."
 sudo apt-get update -y
