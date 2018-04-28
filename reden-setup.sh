@@ -1,24 +1,34 @@
 #!/bin/bash
-clear
-echo "REDEN Masternode Setup Script V1.1 for Ubuntu 16.04 LTS
-Detecting public IP Address..."
+# REDEN Masternode Setup Script V1.1 for Ubuntu 16.04 LTS
 
+# Clears keyboard input buffer
+function clear_stdin { while read -r -t 0 do; read -r; done; }
+
+#####################################################
+clear
+echo "Updating system and installing required packages..."
+sudo apt-get update -y
+
+# Install dig if it's not present
+dpkg -s dnsutils 2>/dev/null >/dev/null || sudo apt-get -y install dnsutils
+
+echo "REDEN Masternode Setup Script V1.1 for Ubuntu 16.04 LTS"
+
+publicip=''
 publicip=$(dig +short myip.opendns.com @resolver1.opendns.com)
+
 if [ -n $publicip ]; then
     echo "IP Address detected:" $publicip
 else
-    echo -e "ERROR: Public IP Address is not detected! \a"
-    read -e -p "Enter Server Public IP Address: " publicip
+    echo -e "ERROR: Public IP Address was not detected! \a"
+    clear_stdin
+    read -e -p "Enter VPS Public IP Address: " publicip
 fi
-sleep 3
-
-echo "Updating system and installing required packages..."
 
 #Reden TCP port
 Port='13058'
 
 # update packages and upgrade Ubuntu
-sudo apt-get -y update
 sudo apt-get -y upgrade
 sudo apt-get -y dist-upgrade
 sudo apt-get -y autoremove
@@ -131,7 +141,7 @@ if ! grep -q "$cronjob" tempcron; then
 fi
 rm tempcron
 
-echo "========================================================================
+echo -e "========================================================================
 Masternode setup is complete!
 ========================================================================
 
@@ -141,13 +151,13 @@ Masternode Private Key: $genkey
 
 Now you can add the following string to the masternode.conf file
 for your Hot Wallet (the wallet with your Reden collateral funds):
-========================================================================"
+======================================================================== \a"
 echo "mn1 $publicip:$Port $genkey TxId TxIdx"
 echo "========================================================================
 
 Use your mouse to copy the whole string above into the clipboard by
-tripple-click + single-click and paste it into your masternodes.conf
-Then replace:
+tripple-click + single-click (Dont use Ctrl-C) and then paste it 
+into your masternodes.conf file and replace:
     'mn1' - with your desired masternode name (alias)
     'TxId' - with Transaction Id from masternode outputs
     'TxIdx' - with Transaction Index (0 or 1)
@@ -155,9 +165,12 @@ Then replace:
 
 To introduce your new masternode to the Reden network, you need to
 issue a masternode start command from your wallet, which proves that
-the collateral for this node is secured.
+the collateral for this node is secured."
 
-1) Wait for the node wallet on this VPS to sync with the other nodes
+clear_stdin
+read -p "*** Press any key to continue ***" -n1 -s
+
+echo "1) Wait for the node wallet on this VPS to sync with the other nodes
 on the network. Eventually the 'IsSynced' status will change
 to 'true', which will indicate a comlete sync, although it may take
 from several minutes to several hours depending on the network state.
@@ -181,13 +194,12 @@ This will indicate that your masternode is fully functional and
 you can celebrate this achievement!
 
 Currently your masternode is syncing with the Reden network...
-Once you press any key to continue, this message will self-destruct!
-Take a moment to re-read it now if anything is not clear...
 
-The following screen will display in real-time the list of
-peer connections, the status of your masternode,
+The following screen will display in real-time
+the list of peer connections, the status of your masternode,
 node synchronization status and additional network and node stats.
 "
+clear_stdin
 read -p "*** Press any key to continue ***" -n1 -s
 
 echo -e "
