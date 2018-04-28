@@ -279,7 +279,7 @@ If you found this script and masternode setup guide helpful...
 
 ...please donate REDEN to: **RCdYg5yq3YfymwrZi8EMBSFHxcwR7acniS**
 
-or just come to our pool to mine REDEN: https://fasterpool.com 
-We have low 0.5% charity fee, which goes to the REDEN dev fund!
+or just come to our pool to mine REDEN: https://fasterpool.com
+We have 0% fees and hourly payouts!
 
 --Allroad
