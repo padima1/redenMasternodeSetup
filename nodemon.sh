@@ -22,11 +22,11 @@ reden-cli -datadir=$datadir getpeerinfo | jq -r '.[] | select(.inbound==false) |
 echo '==========================================================================='
 uptime
 echo '==========================================================================='
-echo 'Masternode Status: \n# reden-cli -datadir=$datadir masternode status' && reden-cli masternode status
+echo 'Masternode Status: \n# reden-cli masternode status' && reden-cli -datadir=$datadir masternode status
 echo '==========================================================================='
-echo 'Sync Status: \n# reden-cli -datadir=$datadir mnsync status' &&  reden-cli mnsync status
+echo 'Sync Status: \n# reden-cli mnsync status' &&  reden-cli mnsync -datadir=$datadir status
 echo '==========================================================================='
-echo 'Masternode Information: \n# reden-cli -datadir=$datadir getinfo' && reden-cli getinfo
+echo 'Masternode Information: \n# reden-cli getinfo' && reden-cli -datadir=$datadir getinfo
 echo '==========================================================================='
 echo 'Usage: nodemon.sh [refresh delay] [datadir index]'
 echo 'Example: nodemon.sh 10 22 will run every 10 seconds and query redend in /$USER/.redencore22'
