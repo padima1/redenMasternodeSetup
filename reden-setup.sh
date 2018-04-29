@@ -62,7 +62,8 @@ rpcpassword=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 
 #Create 2GB swap file
 if [ ! -f /var/swap.img ]; then
-    echo 'Creating 2GB disk swap file...'
+    
+    echo -e 'Creating 2GB disk swap file... This may take a few minutes! \a'
     touch /var/swap.img
     chmod 600 swap.img
     dd if=/dev/zero of=/var/swap.img bs=1024k count=2000
