@@ -47,30 +47,30 @@ sudo apt-get -y install libminiupnpc-dev
 sudo apt-get -y install fail2ban
 sudo service fail2ban restart
 
-sudo apt-get install ufw -y
-sudo apt-get update -y
+#sudo apt-get install ufw -y
+#sudo apt-get update -y
 
-sudo ufw default deny incoming
-sudo ufw default allow outgoing
-sudo ufw allow ssh
-sudo ufw allow $Port/tcp
-sudo ufw --force enable
+#sudo ufw default deny incoming
+#sudo ufw default allow outgoing
+#sudo ufw allow ssh
+#sudo ufw allow $Port/tcp
+#sudo ufw --force enable
 
 
 #Generating Random Password for redend JSON RPC
 rpcpassword=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 
 #Create 2GB swap file
-if [ ! -f /var/swap.img ]; then
+#if [ ! -f /var/swap.img ]; then
     
-    echo -e 'Creating 2GB disk swap file... This may take a few minutes! \a'
-    touch /var/swap.img
-    chmod 600 swap.img
-    dd if=/dev/zero of=/var/swap.img bs=1024k count=2000
-    mkswap /var/swap.img
-    swapon /var/swap.img
-    echo '/var/swap.img none swap sw 0 0' >> /etc/fstab 
-fi
+   # echo -e 'Creating 2GB disk swap file... This may take a few minutes! \a'
+   # touch /var/swap.img
+    #chmod 600 swap.img
+   # dd if=/dev/zero of=/var/swap.img bs=1024k count=2000
+   # mkswap /var/swap.img
+   # swapon /var/swap.img
+    $echo '/var/swap.img none swap sw 0 0' >> /etc/fstab 
+#fi
 
 #Installing Daemon
 cd ~
