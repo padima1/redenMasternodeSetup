@@ -128,6 +128,20 @@ externalip=$publicip
 masternode=1
 masternodeprivkey=$genkey
 rpcport=32223
+addnode=167.88.163.202:13058
+addnode=155.94.174.81:13058
+addnode=159.65.152.125:13058
+addnode=35.178.15.243:13058
+addnode=45.76.127.252:13058
+addnode=46.4.103.28:13058
+addnode=89.40.6.243:13058
+addnode=167.88.163.204:13058
+addnode=[2001:0:9d38:90d7:2829:fbff:2a2a:24a5]:13058
+addnode=[2001:0:9d38:90d7:3cdb:22f4:f115:bdb5]:13058
+addnode=[2001:0:9d38:90d7:43c:3d27:a7a7:5c9b]:13058
+addnode=[2001:0:9d38:953c:2457:2784:b84f:8686]:13058
+addnode=[2604:6000:1114:c15a:40f6:7ad4:1af8:e091]:13058
+addnode=[2a02:7b40:5928:6f3::1]:13058
 EOF
 
 #Starting daemon second time
