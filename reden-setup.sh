@@ -101,6 +101,7 @@ echo 'Creating reden.conf...'
 cat <<EOF > ~/.redencore/reden.conf
 rpcuser=redenrpc
 rpcpassword=$rpcpassword
+rpcport=32223
 EOF
 
 sudo chmod 755 -R ~/.redencore/reden.conf
@@ -126,6 +127,7 @@ maxconnections=256
 externalip=$publicip
 masternode=1
 masternodeprivkey=$genkey
+rpcport=32223
 EOF
 
 #Starting daemon second time
