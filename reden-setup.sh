@@ -69,7 +69,7 @@ rpcpassword=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
    # dd if=/dev/zero of=/var/swap.img bs=1024k count=2000
    # mkswap /var/swap.img
    # swapon /var/swap.img
-    $echo '/var/swap.img none swap sw 0 0' >> /etc/fstab 
+    #$echo '/var/swap.img none swap sw 0 0' >> /etc/fstab 
 #fi
 
 #Installing Daemon
